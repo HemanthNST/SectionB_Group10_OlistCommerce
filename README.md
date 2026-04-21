@@ -1,6 +1,6 @@
-# NST DVA Capstone 2 - Project Repository
+# DVA Capstone 2 - Project Repository
 
-> **Newton School of Technology | Data Visualization & Analytics**
+> **Data Visualization & Analytics**
 > A 2-week industry simulation capstone using Python, GitHub, and Tableau to convert raw data into actionable business intelligence.
 
 ---
@@ -37,8 +37,8 @@ If you are working in Google Colab:
 
 | Field | Details |
 |---|---|
-| **Project Title** | _To be filled by team_ |
-| **Sector** | _e.g. Retail, Finance, Healthcare, EdTech_ |
+| **Project Title** | Olist Marketplace Analytics: Decoding the Drivers of Customer Satisfaction and Revenue |
+| **Sector** | E-Commerce / Retail |
 | **Team ID** | _e.g. DVA-B1-T3_ |
 | **Section** | _To be filled by team_ |
 | **Faculty Mentor** | _To be filled by team_ |
@@ -49,27 +49,27 @@ If you are working in Google Colab:
 
 | Role | Name | GitHub Username |
 |---|---|---|
-| Project Lead | _Name_ | `github-handle` |
-| Data Lead | _Name_ | `github-handle` |
-| ETL Lead | _Name_ | `github-handle` |
-| Analysis Lead | _Name_ | `github-handle` |
-| Visualization Lead | _Name_ | `github-handle` |
-| Strategy Lead | _Name_ | `github-handle` |
-| PPT and Quality Lead | _Name_ | `github-handle` |
+| Project Lead | Hemanth Tenneti | `@HemanthTenneti` |
+| Data Lead |  | `github-handle` |
+| ETL Lead |  | `github-handle` |
+| Analysis Lead |  | `github-handle` |
+| Visualization Lead |  | `github-handle` |
+| Strategy Lead |  | `github-handle` |
+| PPT and Quality Lead |  | `github-handle` |
 
 ---
 
 ## Business Problem
 
-_Describe the sector context, the decision-maker this project serves, and the core business challenge being addressed. Keep this to 3-5 sentences written in plain language, as if addressing a senior stakeholder._
+Olist is a Brazilian marketplace that connects small-and-medium sellers to consumers across all 27 states. Between 2016 and 2018 the platform processed ~100K orders, but not all transactions resulted in happy customers — review scores span 1 to 5, delivery delays are common in certain regions, and repeat purchase behaviour is unclear. The leadership team needs to understand which operational levers (delivery speed, seller quality, product mix, pricing, and payment experience) most influence customer satisfaction and revenue, so they can prioritise fixes that have the highest business impact.
 
 **Core Business Question**
 
-> _State the single main question your Tableau dashboard and Python analysis will answer._
+> Which operational factors — delivery timeliness, seller performance, product category mix, payment behaviour, or geographic bottlenecks — are the strongest drivers of customer satisfaction and revenue, and where should Olist invest resources to maximise impact?
 
 **Decision Supported**
 
-> _What action or decision will this analysis enable the stakeholder to take?_
+> This analysis enables Olist's VP of Marketplace Operations to allocate improvement budgets across logistics, seller management, and category strategy with quantified evidence rather than intuition.
 
 ---
 
@@ -77,21 +77,25 @@ _Describe the sector context, the decision-maker this project serves, and the co
 
 | Attribute | Details |
 |---|---|
-| **Source Name** | _e.g. World Bank, data.gov.in, Kaggle (raw only)_ |
-| **Direct Access Link** | _Paste the direct download or access URL_ |
-| **Row Count** | _Must be greater than 5,000_ |
-| **Column Count** | _Must be greater than 8 meaningful columns_ |
-| **Time Period Covered** | _e.g. Jan 2019 to Dec 2023_ |
-| **Format** | _e.g. CSV, JSON, Excel_ |
+| **Source Name** | Brazilian E-Commerce Public Dataset by Olist (Kaggle) |
+| **Direct Access Link** | https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce |
+| **Row Count** | ~99,441 orders, ~112,650 order items, ~100K+ payments/reviews |
+| **Column Count** | 9 relational tables totalling 55+ columns |
+| **Time Period Covered** | September 2016 to October 2018 |
+| **Format** | CSV (9 files) |
 
 **Key Columns Used**
 
 | Column Name | Description | Role in Analysis |
 |---|---|---|
-| _column_1_ | _What it means_ | _Used for KPI / filter / segmentation_ |
-| _column_2_ | _What it means_ | _Used for KPI / filter / segmentation_ |
-| _column_3_ | _What it means_ | _Used for KPI / filter / segmentation_ |
-| _column_4_ | _What it means_ | _Used for KPI / filter / segmentation_ |
+| `order_id` | Unique order identifier | Primary join key across all tables |
+| `customer_state` | Brazilian state of the customer | Geographic segmentation, regional analysis |
+| `order_purchase_timestamp` | When the order was placed | Time-series trends, seasonality |
+| `price` | Item price in BRL | Revenue, AOV, price-satisfaction analysis |
+| `freight_value` | Shipping cost per item | Freight-to-price ratio, logistics efficiency |
+| `review_score` | Customer satisfaction rating (1–5) | Target variable for satisfaction drivers |
+| `product_category_name_english` | Product category in English | Category-level profitability and satisfaction |
+| `payment_type` | Payment method (credit_card, boleto, etc.) | Payment behaviour and order value analysis |
 
 For full column definitions, see [`docs/data_dictionary.md`](docs/data_dictionary.md).
 
@@ -101,9 +105,13 @@ For full column definitions, see [`docs/data_dictionary.md`](docs/data_dictionar
 
 | KPI | Definition | Formula / Computation |
 |---|---|---|
-| _e.g. Monthly Revenue Growth %_ | _What business outcome this tracks_ | _Show the exact formula or notebook reference_ |
-| _e.g. Customer Churn Rate_ | _What business outcome this tracks_ | _Show the exact formula or notebook reference_ |
-| _e.g. Repeat Purchase Rate_ | _What business outcome this tracks_ | _Show the exact formula or notebook reference_ |
+| **Monthly Revenue (BRL)** | Total transaction value per calendar month | `SUM(price + freight_value)` grouped by `order_purchase_timestamp` month |
+| **Average Order Value (AOV)** | Mean revenue per completed order | `SUM(payment_value) / COUNT(DISTINCT order_id)` where `order_status = 'delivered'` |
+| **On-Time Delivery Rate** | % of orders delivered on or before estimated date | `COUNT(delivered ≤ estimated) / COUNT(delivered)` × 100 |
+| **Customer Satisfaction Score (CSAT)** | Mean review score across all delivered orders | `AVG(review_score)` where `order_status = 'delivered'` |
+| **Repeat Purchase Rate** | % of customers who placed 2+ orders | `COUNT(customer_unique_id with ≥2 orders) / COUNT(DISTINCT customer_unique_id)` × 100 |
+| **Avg Delivery Delay (days)** | Mean difference between actual and estimated delivery | `AVG(delivered_customer_date - estimated_delivery_date)` in days |
+| **Freight-to-Price Ratio** | Shipping cost as proportion of item price | `AVG(freight_value / price)` per order; flag if > 0.5 |
 
 Document KPI logic clearly in `notebooks/04_statistical_analysis.ipynb` and `notebooks/05_final_load_prep.ipynb`.
 
@@ -113,10 +121,10 @@ Document KPI logic clearly in `notebooks/04_statistical_analysis.ipynb` and `not
 
 | Item | Details |
 |---|---|
-| **Dashboard URL** | _Paste Tableau Public link here_ |
-| **Executive View** | _Describe the high-level KPI summary view_ |
-| **Operational View** | _Describe the detailed drill-down view_ |
-| **Main Filters** | _List the interactive filters used_ |
+| **Dashboard URL** | _To be added after Tableau Public publishing_ |
+| **Executive View** | KPI scorecard (Revenue, AOV, CSAT, On-Time %), monthly trend lines, top/bottom performing states |
+| **Operational View** | Drill-down by state → category → seller; delivery delay heatmap; review score vs delivery time scatter; payment type breakdown |
+| **Main Filters** | Date range, Customer State, Product Category, Payment Type, Review Score Band |
 
 Store dashboard screenshots in [`tableau/screenshots/`](tableau/screenshots/) and document the public links in [`tableau/dashboard_links.md`](tableau/dashboard_links.md).
 

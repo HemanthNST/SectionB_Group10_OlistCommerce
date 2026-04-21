@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_meta
+
+# Data — keep raw/, ignore large processed files
+# data/processed/*.csv
+# !data/processed/.gitkeep
+
+# Executed notebook copy (the source-of-truth is 01_extraction.ipynb)
+notebooks/*_executed.ipynb
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OpenCode internal
+.git/opencode
