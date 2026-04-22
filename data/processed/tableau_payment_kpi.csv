@@ -1,0 +1,5 @@
+primary_payment_type,total_revenue,order_count,avg_order_value,avg_review,avg_installments
+boleto,2769838.18,19190,144.34,4.16,1.0
+credit_card,12280373.97,74275,165.34,4.16,3.5
+debit_card,201721.24,1436,140.47,4.25,1.0
+voucher,157495.41,1498,105.14,4.11,1.0

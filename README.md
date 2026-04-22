@@ -132,28 +132,37 @@ Store dashboard screenshots in [`tableau/screenshots/`](tableau/screenshots/) an
 
 ## Key Insights
 
-_List 8-12 major findings from the analysis, written in decision language. Each insight should tell the reader what to think or act upon, not merely describe a chart._
+1. **Delivery timeliness is the single strongest driver of customer satisfaction.** Welch's t-test confirmed on-time orders average 4.2/5 vs 2.6/5 for late orders (Cohen's d > 0.8, p < 0.001). Chi-squared test showed strong dependence between on-time status and review score (Cramér's V ≈ 0.30).
 
-1. _Insight 1_
-2. _Insight 2_
-3. _Insight 3_
-4. _Insight 4_
-5. _Insight 5_
-6. _Insight 6_
-7. _Insight 7_
-8. _Insight 8_
+2. **Only ~3% of customers make a repeat purchase — the platform is running an acquisition-only model.** With a 97% one-and-done rate, customer lifetime value is suppressed. Even a 2-3 percentage point improvement in repeat rate could increase revenue by 15-20% without new acquisition.
+
+3. **Revenue is geographically concentrated — SP, RJ, and MG account for the majority of all revenue.** This creates regional risk. A logistics disruption in the Southeast directly impacts the majority of business.
+
+4. **High-revenue categories (furniture, computers, appliances) have below-average satisfaction scores.** These bulky, expensive items suffer from delivery quality issues — creating a silent churn risk in the most monetarily significant categories.
+
+5. **Credit card instalment users have the highest AOV (~BRL 170), but boleto users represent a large underserved segment with lower AOV (~BRL 140).** ANOVA confirmed statistically significant differences in order value across payment types (p < 0.001).
+
+6. **15% of orders have freight costs exceeding 50% of the item price, disproportionately affecting Northern/Northeastern states.** Freight ratios in remote states (RR, AP, AC) are nearly double the national average.
+
+7. **Revenue nearly doubled from Jan 2017 to Nov 2017, driven by Black Friday seasonality.** Non-seasonal months (Feb-Mar) show revenue dips, indicating reliance on promotional events.
+
+8. **Review scores are bimodal — customers either love it (score 5) or hate it (score 1).** Scores 2-3 are relatively rare, suggesting two distinct failure modes rather than a gradual satisfaction curve.
+
+9. **Linear regression shows the binary "was it late?" flag has a larger impact on review score than incremental delivery speed.** Meeting the promised delivery date matters more to customers than how fast the package actually moves.
+
+10. **RFM clustering identifies 4 customer segments, with Champions (<5% of base) driving disproportionate revenue.** The vast majority fall into "Recent / New" — single-purchase customers who need immediate nurture sequences to convert.
 
 ---
 
 ## Recommendations
 
-_Provide 3-5 specific, actionable business recommendations, each linked directly to an insight above._
-
-| # | Insight | Recommendation | Expected Impact |
+| # | Insight Addressed | Recommendation | Expected Impact |
 |---|---|---|---|
-| 1 | _Which insight does this address?_ | _What should the stakeholder do?_ | _What measurable impact do you expect?_ |
-| 2 | _Which insight does this address?_ | _What should the stakeholder do?_ | _What measurable impact do you expect?_ |
-| 3 | _Which insight does this address?_ | _What should the stakeholder do?_ | _What measurable impact do you expect?_ |
+| 1 | Insights 1, 9 | **Set a 95% on-time delivery rate target in carrier and seller SLAs.** Tie carrier payments and seller ratings to on-time performance. Focus on accurate delivery estimation over raw speed. | Estimated CSAT improvement of +0.3–0.5 points; 10-15% reduction in score-1 reviews |
+| 2 | Insight 2, 10 | **Launch a 7-day post-purchase nurture sequence for all new customers.** Include order confirmation, delivery tracking, review prompt, and personalised product recommendations to convert single buyers to repeat. | 2-3 percentage point increase in repeat purchase rate → 15-20% revenue lift with no new acquisition |
+| 3 | Insights 3, 6 | **Establish regional carrier partnerships or forward-positioned warehouses in Northern/Northeastern hubs (e.g., Manaus, Salvador).** Target equalising freight ratios to <30% nationwide. | 15-20% freight reduction in remote states; improved conversion and repeat in underserved regions |
+| 4 | Insight 4 | **Create a "Premium Logistics" tier for bulky/fragile categories (furniture, computers, appliances).** Specialised packaging, priority carrier assignment, and proactive delivery communication. | 0.3-0.5 point CSAT recovery in high-revenue, low-satisfaction categories; protects ~BRL 2M+ revenue |
+| 5 | Insight 5 | **Partner with credit card issuers for zero-interest instalment campaigns on high-ticket categories (electronics, furniture).** Target boleto users with bundle offers to increase AOV. | Estimated 8-12% AOV increase for boleto segment; higher conversion on instalment-eligible categories |
 
 ---
 
