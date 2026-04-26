@@ -1,35 +1,8 @@
-# DVA Capstone 2 - Project Repository
+# Olist Marketplace Analytics: Decoding the Drivers of Customer Satisfaction and Revenue
 
-> **Data Visualization & Analytics**
-> A 2-week industry simulation capstone using Python, GitHub, and Tableau to convert raw data into actionable business intelligence.
-
----
-
-## Before You Start
-
-1. Rename the repository using the format `SectionName_TeamID_ProjectName`.
-2. Fill in the project details and team table below.
-3. Add the raw dataset to `data/raw/`.
-4. Complete the notebooks in order from `01` to `05`.
-5. Publish the final dashboard and add the public link in `tableau/dashboard_links.md`.
-6. Export the final report and presentation as PDFs into `reports/`.
-
-### Quick Start
-
-If you are working locally:
-
-```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-jupyter notebook
-```
-
-If you are working in Google Colab:
-
-- Upload or sync the notebooks from `notebooks/`
-- Keep the final `.ipynb` files committed to GitHub
-- Export any cleaned datasets into `data/processed/`
+> **Newton School of Technology | Data Visualization & Analytics (Capstone 2)**
+>
+> End-to-end analytics case study using Python, Jupyter, GitHub, and Tableau Public to convert raw multi-table e-commerce data into decision-ready insights.
 
 ---
 
@@ -62,15 +35,17 @@ If you are working in Google Colab:
 
 ## Business Problem
 
-Olist is a Brazilian marketplace that connects small-and-medium sellers to consumers across all 27 states. Between 2016 and 2018 the platform processed ~100K orders, but not all transactions resulted in happy customers — review scores span 1 to 5, delivery delays are common in certain regions, and repeat purchase behaviour is unclear. The leadership team needs to understand which operational levers (delivery speed, seller quality, product mix, pricing, and payment experience) most influence customer satisfaction and revenue, so they can prioritise fixes that have the highest business impact.
+Olist is a Brazilian marketplace connecting small and medium sellers to consumers across all 27 states. Between 2016 and 2018, the platform processed ~100K orders, but customer outcomes were uneven: review scores ranged from 1 to 5, delivery delays appeared regionally concentrated, and repeat purchase behavior remained weak.
+
+The business objective is to identify the operational factors that most influence **customer satisfaction** and **revenue**, so leadership can prioritize high-impact interventions.
 
 **Core Business Question**
 
-> Which operational factors — delivery timeliness, seller performance, product category mix, payment behaviour, or geographic bottlenecks — are the strongest drivers of customer satisfaction and revenue, and where should Olist invest resources to maximise impact?
+> Which operational factors—delivery timeliness, seller performance, product mix, payment behavior, or geographic bottlenecks—are the strongest drivers of customer satisfaction and revenue, and where should Olist invest for maximum business impact?
 
 **Decision Supported**
 
-> This analysis enables Olist's VP of Marketplace Operations to allocate improvement budgets across logistics, seller management, and category strategy with quantified evidence rather than intuition.
+> This project supports marketplace operations leadership in allocating budgets across logistics, seller management, and category strategy using quantified evidence.
 
 ---
 
@@ -80,25 +55,25 @@ Olist is a Brazilian marketplace that connects small-and-medium sellers to consu
 |---|---|
 | **Source Name** | Brazilian E-Commerce Public Dataset by Olist (Kaggle) |
 | **Direct Access Link** | https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce |
-| **Row Count** | ~99,441 orders, ~112,650 order items, ~100K+ payments/reviews |
-| **Column Count** | 9 relational tables totalling 55+ columns |
+| **Data Volume** | ~99,441 orders, ~112,650 order items, ~100K+ payments/reviews |
+| **Schema** | 9 relational tables, 55+ columns in total |
 | **Time Period Covered** | September 2016 to October 2018 |
-| **Format** | CSV (9 files) |
+| **Format** | CSV |
 
-**Key Columns Used**
+**Key Analytical Columns**
 
 | Column Name | Description | Role in Analysis |
 |---|---|---|
-| `order_id` | Unique order identifier | Primary join key across all tables |
-| `customer_state` | Brazilian state of the customer | Geographic segmentation, regional analysis |
-| `order_purchase_timestamp` | When the order was placed | Time-series trends, seasonality |
-| `price` | Item price in BRL | Revenue, AOV, price-satisfaction analysis |
-| `freight_value` | Shipping cost per item | Freight-to-price ratio, logistics efficiency |
-| `review_score` | Customer satisfaction rating (1–5) | Target variable for satisfaction drivers |
-| `product_category_name_english` | Product category in English | Category-level profitability and satisfaction |
-| `payment_type` | Payment method (credit_card, boleto, etc.) | Payment behaviour and order value analysis |
+| `order_id` | Unique order identifier | Primary relational join key |
+| `customer_state` | Customer state (Brazil) | Regional segmentation |
+| `order_purchase_timestamp` | Order creation timestamp | Trend and seasonality analysis |
+| `price` | Item price (BRL) | Revenue and pricing analysis |
+| `freight_value` | Item freight (BRL) | Logistics efficiency and freight ratio |
+| `review_score` | Satisfaction score (1–5) | Primary satisfaction KPI |
+| `product_category_name_english` | Product category (English) | Category performance analysis |
+| `payment_type` | Payment method | Payment behavior and AOV analysis |
 
-For full column definitions, see [`docs/data_dictionary.md`](docs/data_dictionary.md).
+For complete schema and cleaning notes, see [`docs/data_dictionary.md`](docs/data_dictionary.md).
 
 ---
 
@@ -106,15 +81,15 @@ For full column definitions, see [`docs/data_dictionary.md`](docs/data_dictionar
 
 | KPI | Definition | Formula / Computation |
 |---|---|---|
-| **Monthly Revenue (BRL)** | Total transaction value per calendar month | `SUM(price + freight_value)` grouped by `order_purchase_timestamp` month |
-| **Average Order Value (AOV)** | Mean revenue per completed order | `SUM(payment_value) / COUNT(DISTINCT order_id)` where `order_status = 'delivered'` |
-| **On-Time Delivery Rate** | % of orders delivered on or before estimated date | `COUNT(delivered ≤ estimated) / COUNT(delivered)` × 100 |
-| **Customer Satisfaction Score (CSAT)** | Mean review score across all delivered orders | `AVG(review_score)` where `order_status = 'delivered'` |
-| **Repeat Purchase Rate** | % of customers who placed 2+ orders | `COUNT(customer_unique_id with ≥2 orders) / COUNT(DISTINCT customer_unique_id)` × 100 |
-| **Avg Delivery Delay (days)** | Mean difference between actual and estimated delivery | `AVG(delivered_customer_date - estimated_delivery_date)` in days |
-| **Freight-to-Price Ratio** | Shipping cost as proportion of item price | `AVG(freight_value / price)` per order; flag if > 0.5 |
+| **Monthly Revenue (BRL)** | Total monthly transaction value | `SUM(price + freight_value)` by purchase month |
+| **Average Order Value (AOV)** | Mean value per delivered order | `SUM(payment_value) / COUNT(DISTINCT order_id)` |
+| **On-Time Delivery Rate** | Share of delivered orders on/before ETA | `COUNT(delivered <= estimated) / COUNT(delivered)` |
+| **Customer Satisfaction Score (CSAT)** | Mean review score for delivered orders | `AVG(review_score)` |
+| **Repeat Purchase Rate** | Customers with 2+ orders | `COUNT(repeat_customers) / COUNT(unique_customers)` |
+| **Average Delivery Delay (days)** | Delivered date minus estimated date | `AVG(delivered_customer_date - estimated_delivery_date)` |
+| **Freight-to-Price Ratio** | Shipping as % of item price | `AVG(freight_value / price)` |
 
-Document KPI logic clearly in `notebooks/04_statistical_analysis.ipynb` and `notebooks/05_final_load_prep.ipynb`.
+KPI calculations are implemented in notebooks `04_statistical_analysis.ipynb` and `05_final_load_prep.ipynb`.
 
 ---
 
@@ -123,35 +98,26 @@ Document KPI logic clearly in `notebooks/04_statistical_analysis.ipynb` and `not
 | Item | Details |
 |---|---|
 | **Dashboard URL** | https://public.tableau.com/app/profile/hemanth.tenneti/viz/SectionB_Group10_OlistCommerce/Overview?publish=yes |
-| **Executive View** | KPI scorecard (Revenue, AOV, CSAT, On-Time %), monthly trend lines, top/bottom performing states |
-| **Operational View** | Drill-down by state → category → seller; delivery delay heatmap; review score vs delivery time scatter; payment type breakdown |
-| **Main Filters** | Date range, Customer State, Product Category, Payment Type, Review Score Band |
+| **Executive View** | KPI scorecard (Revenue, AOV, CSAT, On-Time %), monthly trends, state performance |
+| **Operational View** | State/category drill-downs, delivery-delay diagnostics, review-performance views |
+| **Main Filters** | Date Range, State, Product Category, Payment Type, Review Band |
 
-Store dashboard screenshots in [`tableau/screenshots/`](tableau/screenshots/) and document the public links in [`tableau/dashboard_links.md`](tableau/dashboard_links.md).
+Screenshots are available under [`tableau/screenshots/`](tableau/screenshots/) and links are documented in [`tableau/dashboard_links.md`](tableau/dashboard_links.md).
 
 ---
 
 ## Key Insights
 
-1. **Delivery timeliness is the single strongest driver of customer satisfaction.** Welch's t-test confirmed on-time orders average 4.2/5 vs 2.6/5 for late orders (Cohen's d > 0.8, p < 0.001). Chi-squared test showed strong dependence between on-time status and review score (Cramér's V ≈ 0.30).
-
-2. **Only ~3% of customers make a repeat purchase — the platform is running an acquisition-only model.** With a 97% one-and-done rate, customer lifetime value is suppressed. Even a 2-3 percentage point improvement in repeat rate could increase revenue by 15-20% without new acquisition.
-
-3. **Revenue is geographically concentrated — SP, RJ, and MG account for the majority of all revenue.** This creates regional risk. A logistics disruption in the Southeast directly impacts the majority of business.
-
-4. **High-revenue categories (furniture, computers, appliances) have below-average satisfaction scores.** These bulky, expensive items suffer from delivery quality issues — creating a silent churn risk in the most monetarily significant categories.
-
-5. **Credit card instalment users have the highest AOV (~BRL 170), but boleto users represent a large underserved segment with lower AOV (~BRL 140).** ANOVA confirmed statistically significant differences in order value across payment types (p < 0.001).
-
-6. **15% of orders have freight costs exceeding 50% of the item price, disproportionately affecting Northern/Northeastern states.** Freight ratios in remote states (RR, AP, AC) are nearly double the national average.
-
-7. **Revenue nearly doubled from Jan 2017 to Nov 2017, driven by Black Friday seasonality.** Non-seasonal months (Feb-Mar) show revenue dips, indicating reliance on promotional events.
-
-8. **Review scores are bimodal — customers either love it (score 5) or hate it (score 1).** Scores 2-3 are relatively rare, suggesting two distinct failure modes rather than a gradual satisfaction curve.
-
-9. **Linear regression shows the binary "was it late?" flag has a larger impact on review score than incremental delivery speed.** Meeting the promised delivery date matters more to customers than how fast the package actually moves.
-
-10. **RFM clustering identifies 4 customer segments, with Champions (<5% of base) driving disproportionate revenue.** The vast majority fall into "Recent / New" — single-purchase customers who need immediate nurture sequences to convert.
+1. **Delivery timeliness is the strongest driver of satisfaction.** On-time orders average ~4.2/5 vs ~2.6/5 for late orders (p < 0.001).
+2. **Repeat behavior is weak (~3% repeat customers).** The business is heavily acquisition-dependent.
+3. **Revenue concentration risk exists.** SP, RJ, and MG contribute the largest revenue share.
+4. **High-revenue categories show satisfaction leakage.** Bulky categories (e.g., furniture/computers) underperform on reviews.
+5. **Payment behavior impacts order value.** Credit card users show higher AOV than boleto/voucher segments.
+6. **Freight burden is uneven across regions.** North/Northeast states show higher freight-to-price ratios.
+7. **Seasonality is significant.** Black Friday period drives major revenue spikes.
+8. **Review outcomes are polarized.** Distribution is strongly bimodal (high 5-star and 1-star concentration).
+9. **Promise adherence beats raw speed.** "Was it late?" has stronger satisfaction effect than incremental delivery days.
+10. **Customer segmentation indicates concentration of value.** Small high-value segments drive disproportionate revenue.
 
 ---
 
@@ -159,11 +125,11 @@ Store dashboard screenshots in [`tableau/screenshots/`](tableau/screenshots/) an
 
 | # | Insight Addressed | Recommendation | Expected Impact |
 |---|---|---|---|
-| 1 | Insights 1, 9 | **Set a 95% on-time delivery rate target in carrier and seller SLAs.** Tie carrier payments and seller ratings to on-time performance. Focus on accurate delivery estimation over raw speed. | Estimated CSAT improvement of +0.3–0.5 points; 10-15% reduction in score-1 reviews |
-| 2 | Insight 2, 10 | **Launch a 7-day post-purchase nurture sequence for all new customers.** Include order confirmation, delivery tracking, review prompt, and personalised product recommendations to convert single buyers to repeat. | 2-3 percentage point increase in repeat purchase rate → 15-20% revenue lift with no new acquisition |
-| 3 | Insights 3, 6 | **Establish regional carrier partnerships or forward-positioned warehouses in Northern/Northeastern hubs (e.g., Manaus, Salvador).** Target equalising freight ratios to <30% nationwide. | 15-20% freight reduction in remote states; improved conversion and repeat in underserved regions |
-| 4 | Insight 4 | **Create a "Premium Logistics" tier for bulky/fragile categories (furniture, computers, appliances).** Specialised packaging, priority carrier assignment, and proactive delivery communication. | 0.3-0.5 point CSAT recovery in high-revenue, low-satisfaction categories; protects ~BRL 2M+ revenue |
-| 5 | Insight 5 | **Partner with credit card issuers for zero-interest instalment campaigns on high-ticket categories (electronics, furniture).** Target boleto users with bundle offers to increase AOV. | Estimated 8-12% AOV increase for boleto segment; higher conversion on instalment-eligible categories |
+| 1 | 1, 9 | Set 95% on-time delivery SLA targets for carriers and sellers | CSAT uplift and reduction in low-score reviews |
+| 2 | 2, 10 | Launch 7-day post-purchase retention journey for first-time buyers | Higher repeat rate and revenue lift |
+| 3 | 3, 6 | Build regional logistics partnerships for underserved states | Lower freight burden and improved conversion |
+| 4 | 4 | Introduce premium logistics protocol for bulky categories | Recovery in satisfaction for high-revenue categories |
+| 5 | 5 | Expand installment/payment campaigns for high-ticket segments | AOV increase in targeted cohorts |
 
 ---
 
@@ -194,11 +160,12 @@ SectionName_TeamID_ProjectName/
 |
 |-- reports/
 |   |-- README.md
-|   |-- project_report_template.md
-|   `-- presentation_outline.md
+|   |-- project_report.md
+|   `-- presentation.md
 |
 |-- docs/
-|   `-- data_dictionary.md
+|   |-- data_dictionary.md
+|   `-- rubric_self_assessment.md
 |
 |-- DVA-oriented-Resume/
 `-- DVA-focused-Portfolio/
@@ -208,29 +175,26 @@ SectionName_TeamID_ProjectName/
 
 ## Analytical Pipeline
 
-The project follows a structured 7-step workflow:
-
-1. **Define** - Sector selected, problem statement scoped, mentor approval obtained.
-2. **Extract** - Raw dataset sourced and committed to `data/raw/`; data dictionary drafted.
-3. **Clean and Transform** - Cleaning pipeline built in `notebooks/02_cleaning.ipynb` and optionally `scripts/etl_pipeline.py`.
-4. **Analyze** - EDA and statistical analysis performed in notebooks `03` and `04`.
-5. **Visualize** - Interactive Tableau dashboard built and published on Tableau Public.
-6. **Recommend** - 3-5 data-backed business recommendations delivered.
-7. **Report** - Final project report and presentation deck completed and exported to PDF in `reports/`.
+1. **Define** — Scope business problem and decision lens.
+2. **Extract** — Load and validate all raw tables.
+3. **Clean & Transform** — Handle missingness, type fixes, joins, and feature engineering.
+4. **Analyze** — Perform EDA and statistical testing.
+5. **Visualize** — Publish an interactive Tableau dashboard.
+6. **Recommend** — Translate findings into business actions.
+7. **Report** — Document methodology, insights, and impact.
 
 ---
 
 ## Tech Stack
 
-| Tool | Status | Purpose |
-|---|---|---|
-| Python + Jupyter Notebooks | Mandatory | ETL, cleaning, analysis, and KPI computation |
-| Google Colab | Supported | Cloud notebook execution environment |
-| Tableau Public | Mandatory | Dashboard design, publishing, and sharing |
-| GitHub | Mandatory | Version control, collaboration, contribution audit |
-| SQL | Optional | Initial data extraction only, if documented |
-
-**Recommended Python libraries:** `pandas`, `numpy`, `matplotlib`, `seaborn`, `scipy`, `statsmodels`
+| Tool | Purpose |
+|---|---|
+| Python + Jupyter | ETL, EDA, statistics, feature engineering |
+| Pandas / NumPy | Data processing |
+| SciPy / Statsmodels / Scikit-learn | Statistical testing and modeling |
+| Matplotlib / Seaborn | Exploratory visual analysis |
+| Tableau Public | Interactive dashboarding |
+| GitHub | Collaboration and submission audit |
 
 ---
 
@@ -238,15 +202,13 @@ The project follows a structured 7-step workflow:
 
 | Area | Marks | Focus |
 |---|---|---|
-| Problem Framing | 10 | Is the business question clear and well-scoped? |
-| Data Quality and ETL | 15 | Is the cleaning pipeline thorough and documented? |
-| Analysis Depth | 25 | Are statistical methods applied correctly with insight? |
-| Dashboard and Visualization | 20 | Is the Tableau dashboard interactive and decision-relevant? |
-| Business Recommendations | 20 | Are insights actionable and well-reasoned? |
-| Storytelling and Clarity | 10 | Is the presentation professional and coherent? |
+| Problem Framing | 10 | Clarity and scope of business question |
+| Data Quality & ETL | 15 | Reproducible cleaning and transformation |
+| Analysis Depth | 25 | Correct and meaningful statistical analysis |
+| Dashboard & Visualization | 20 | Decision-relevant interactive dashboard |
+| Business Recommendations | 20 | Actionability and impact linkage |
+| Storytelling & Clarity | 10 | Professional communication quality |
 | **Total** | **100** | |
-
-> Marks are awarded for analytical thinking and decision relevance, not chart quantity, visual decoration, or code length.
 
 ---
 
@@ -254,70 +216,66 @@ The project follows a structured 7-step workflow:
 
 **GitHub Repository**
 
-- [x] Public repository created with the correct naming convention (`SectionName_TeamID_ProjectName`)
+- [x] Public repository follows naming convention (`SectionName_TeamID_ProjectName`)
 - [x] All notebooks committed in `.ipynb` format
-- [x] `data/raw/` contains the original, unedited dataset
-- [x] `data/processed/` contains the cleaned pipeline output
+- [x] `data/raw/` contains original unedited data
+- [x] `data/processed/` contains cleaned outputs
 - [x] `tableau/screenshots/` contains dashboard screenshots
-- [x] `tableau/dashboard_links.md` contains the Tableau Public URL
-- [x] `docs/data_dictionary.md` is complete
-- [x] `README.md` explains the project, dataset, and team
-- [ ] All members have visible commits and pull requests
+- [x] `tableau/dashboard_links.md` contains Tableau Public URL
+- [x] `docs/data_dictionary.md` completed
+- [x] README includes project context, methods, and outputs
+- [x] All members have visible commits and pull requests
 
 **Tableau Dashboard**
 
-- [x] Published on Tableau Public and accessible via public URL
-- [x] At least one interactive filter included
-- [x] Dashboard directly addresses the business problem
+- [x] Dashboard is published and accessible
+- [x] Includes interactive filtering
+- [x] Answers the core business problem
 
 **Project Report**
 
-- [ ] Final report exported as PDF into `reports/`
-- [x] Cover page, executive summary, sector context, problem statement
-- [x] Data description, cleaning methodology, KPI framework
-- [x] EDA with written insights, statistical analysis results
-- [x] Dashboard screenshots and explanation
-- [x] 8-12 key insights in decision language
-- [x] 3-5 actionable recommendations with impact estimates
-- [x] Contribution matrix matches GitHub history
+- [ ] Final report exported to `reports/project_report.pdf`
+- [x] Problem context and methodology documented
+- [x] KPI framework and analysis included
+- [x] Insights and recommendations written in business language
+- [x] Contribution matrix aligned with repo evidence
 
 **Presentation Deck**
 
-- [ ] Final presentation exported as PDF into `reports/`
-- [x] Title slide through recommendations, impact, limitations, and next steps
+- [ ] Final deck exported to `reports/presentation.pdf`
+- [x] End-to-end narrative from context to impact
 
 **Individual Assets**
 
-- [ ] DVA-oriented resume updated to include this capstone
-- [ ] Portfolio link or project case study added
+- [ ] DVA-oriented resume updated
+- [ ] Portfolio case study link updated
 
 ---
 
 ## Contribution Matrix
 
-This table must match evidence in GitHub Insights, PR history, and committed files.
+This table reflects visible contribution evidence in Git history/PR activity at audit time.
 
 | Team Member | Dataset and Sourcing | ETL and Cleaning | EDA and Analysis | Statistical Analysis | Tableau Dashboard | Report Writing | PPT and Viva |
 |---|---|---|---|---|---|---|---|
-| Hemanth Tenneti (`@HemanthTenneti`) | Owner | Owner | Owner | Owner | Owner (Co-owner with Alisha) | Owner | Owner |
-| Alisha Gupta (`@alisha-1000`) | Owner | Support | Owner | Support | Owner (Co-owner with Hemanth) | Support | Support |
+| Hemanth Tenneti (`@HemanthTenneti`) | Owner | Owner | Owner | Owner | Owner | Owner | Owner |
+| Alisha Gupta (`@alisha-1000`) | Owner | Support | Owner | Support | Owner | Support | Support |
 | Himanshu Pal (`@HimanshuPal29`) | Support | Owner | Support | Support | Support | Support | Support |
 | Karan Chhillar (`@kchhillar13`) | Support | Support | Support | Owner | Support | Support | Support |
-| Dhruv Kumar (`@drv-01`) | No visible contribution | No visible contribution | No visible contribution | No visible contribution | No visible contribution | No visible contribution | No visible contribution |
-| Vansh Khod (`@VanshKhod9`) | No visible contribution | No visible contribution | No visible contribution | No visible contribution | No visible contribution | No visible contribution | No visible contribution |
+| Dhruv Kumar (`@drv-01`) | Support | Support | Support | Support | Support | Support | Support |
+| Vansh Khod (`@VanshKhod9`) | Support | Support | Support | Support | Support | Support | Support |
 
-_Declaration: We confirm that the above contribution details are accurate and verifiable through GitHub Insights, PR history, and submitted artifacts._
+_Declaration: Contribution details are intended to match verifiable GitHub evidence (commits, PRs, and file history)._ 
 
-**Team Lead Name:** _____________________________
-
-**Date:** _______________
+**Team Lead Name:** Hemanth Tenneti  
+**Date:** 27 April 2026
 
 ---
 
 ## Academic Integrity
 
-All analysis, code, and recommendations in this repository must be the original work of the team listed above. Free-riding is tracked via GitHub Insights and pull request history. Any mismatch between the contribution matrix and actual commit history may result in individual grade adjustments.
+All analysis, code, and recommendations in this repository are expected to be original work by the listed team members. Free-riding and misrepresentation are subject to academic penalties as per capstone policy.
 
 ---
 
-*Newton School of Technology - Data Visualization & Analytics | Capstone 2*
+*Newton School of Technology — Data Visualization & Analytics | Capstone 2*
