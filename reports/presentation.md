@@ -9,9 +9,9 @@
 **Olist Marketplace Analytics: Decoding the Drivers of Customer Satisfaction and Revenue**
 
 - Sector: E-Commerce / Retail (Brazil)
-- Team ID: _To be filled_
-- Team Members: _Names_
-- Faculty Mentor: _Name_
+- Team ID: Group10
+- Team Members: Hemanth Tenneti, Alisha Gupta, Himanshu Pal, Karan Chhillar, Dhruv Kumar, Vansh Khod
+- Faculty Mentor: Satyaki Das
 - Newton School of Technology | DVA Capstone 2
 
 ---
@@ -84,6 +84,8 @@
 ---
 
 ## Slide 7 — Dashboard Walkthrough
+
+Tableau Public dashboard: https://public.tableau.com/app/profile/hemanth.tenneti/viz/SectionB_Group10_OlistCommerce/Overview?publish=yes
 
 *Add screenshots from Tableau Public dashboard here.*
 

@@ -6,9 +6,8 @@ Use this file to store the final public links for your Tableau deliverables.
 
 | Item | Link | Notes |
 |---|---|---|
-| Tableau Public Dashboard | _Paste URL here_ | _Main submission link_ |
-| Workbook / Story Link | _Paste URL here if applicable_ | _Optional_ |
-| Demo Recording | _Paste URL here if applicable_ | _Optional_ |
+| Tableau Public Dashboard | https://public.tableau.com/app/profile/hemanth.tenneti/viz/SectionB_Group10_OlistCommerce/Overview?publish=yes | Main submission link |
+| Workbook / Story Link | https://public.tableau.com/app/profile/hemanth.tenneti/viz/SectionB_Group10_OlistCommerce/Overview?publish=yes | Same workbook (multi-page views) |
 
 ## Screenshot Checklist
 

@@ -4,13 +4,13 @@
 
 **Sector**: E-Commerce / Retail (Brazil)
 
-**Team ID**: _To be filled_
+**Team ID**: Group10
 
 **Institute**: Newton School of Technology
 
-**Faculty Mentor**: _To be filled_
+**Faculty Mentor**: Satyaki Das
 
-**Submission Date**: _To be filled_
+**Submission Date**: 27 April 2026
 
 ---
 
@@ -27,12 +27,13 @@
 | Role | Name | GitHub |
 |---|---|---|
 | Project Lead | Hemanth Tenneti | @HemanthTenneti |
-| Data Lead | _Name_ | _handle_ |
-| ETL Lead | _Name_ | _handle_ |
-| Analysis Lead | _Name_ | _handle_ |
-| Visualization Lead | _Name_ | _handle_ |
-| Strategy Lead | _Name_ | _handle_ |
-| PPT and Quality Lead | _Name_ | _handle_ |
+| Data Lead | Alisha Gupta | @alisha-1000 |
+| ETL Lead | Himanshu Pal | @HimanshuPal29 |
+| Analysis Lead | Karan Chhillar | @kchhillar13 |
+| Visualization Lead | Alisha Gupta | @alisha-1000 |
+| Strategy Lead | Dhruv Kumar | @drv-01 |
+| PPT and Quality Lead | Hemanth Tenneti | @HemanthTenneti |
+| Business Support | Vansh Khod | @VanshKhod9 |
 
 ---
 
@@ -169,7 +170,11 @@ Spearman correlation shows `delivery_delay_days` has the strongest negative corr
 
 ## 10. Dashboard Walkthrough
 
-*To be completed after Tableau Public dashboard is built. Screenshots will be added to `tableau/screenshots/`.*
+Tableau Public dashboard is live and publicly accessible:
+
+**Dashboard URL**: https://public.tableau.com/app/profile/hemanth.tenneti/viz/SectionB_Group10_OlistCommerce/Overview?publish=yes
+
+Screenshots for each dashboard page are maintained in `tableau/screenshots/`.
 
 **Executive View**: KPI scorecard showing Revenue, AOV, CSAT, On-Time %, with monthly trend lines.
 
@@ -231,11 +236,11 @@ Spearman correlation shows `delivery_delay_days` has the strongest negative corr
 
 | Team Member | Dataset & Sourcing | ETL & Cleaning | EDA & Analysis | Statistical Analysis | Tableau Dashboard | Report Writing | PPT & Viva |
 |---|---|---|---|---|---|---|---|
-| Hemanth Tenneti | Owner | Owner | Owner | Owner | Support | Owner | Owner |
-| _Member 2_ | _Owner / Support_ | _Owner / Support_ | _Owner / Support_ | _Owner / Support_ | _Owner / Support_ | _Owner / Support_ | _Owner / Support_ |
-| _Member 3_ | _Owner / Support_ | _Owner / Support_ | _Owner / Support_ | _Owner / Support_ | _Owner / Support_ | _Owner / Support_ | _Owner / Support_ |
-| _Member 4_ | _Owner / Support_ | _Owner / Support_ | _Owner / Support_ | _Owner / Support_ | _Owner / Support_ | _Owner / Support_ | _Owner / Support_ |
-| _Member 5_ | _Owner / Support_ | _Owner / Support_ | _Owner / Support_ | _Owner / Support_ | _Owner / Support_ | _Owner / Support_ | _Owner / Support_ |
-| _Member 6_ | _Owner / Support_ | _Owner / Support_ | _Owner / Support_ | _Owner / Support_ | _Owner / Support_ | _Owner / Support_ | _Owner / Support_ |
+| Hemanth Tenneti (@HemanthTenneti) | Owner | Owner | Owner | Owner | Owner (Co-owner with Alisha) | Owner | Owner |
+| Alisha Gupta (@alisha-1000) | Owner | Support | Owner | Support | Owner (Co-owner with Hemanth) | Support | Support |
+| Himanshu Pal (@HimanshuPal29) | Support | Owner | Support | Support | Support | Support | Support |
+| Karan Chhillar (@kchhillar13) | Support | Support | Support | Owner | Support | Support | Support |
+| Dhruv Kumar (@drv-01) | No visible contribution | No visible contribution | No visible contribution | No visible contribution | No visible contribution | No visible contribution | No visible contribution |
+| Vansh Khod (@VanshKhod9) | No visible contribution | No visible contribution | No visible contribution | No visible contribution | No visible contribution | No visible contribution | No visible contribution |
 
 *Declaration: We confirm that the above contribution details are accurate and verifiable through GitHub Insights, PR history, and submitted artifacts.*

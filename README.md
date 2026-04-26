@@ -39,23 +39,24 @@ If you are working in Google Colab:
 |---|---|
 | **Project Title** | Olist Marketplace Analytics: Decoding the Drivers of Customer Satisfaction and Revenue |
 | **Sector** | E-Commerce / Retail |
-| **Team ID** | _e.g. DVA-B1-T3_ |
-| **Section** | _To be filled by team_ |
-| **Faculty Mentor** | _To be filled by team_ |
+| **Team ID** | Group10 |
+| **Section** | Section B |
+| **Faculty Mentor** | Satyaki Das |
 | **Institute** | Newton School of Technology |
-| **Submission Date** | _To be filled by team_ |
+| **Submission Date** | 27 April 2026 |
 
 ### Team Members
 
 | Role | Name | GitHub Username |
 |---|---|---|
 | Project Lead | Hemanth Tenneti | `@HemanthTenneti` |
-| Data Lead |  | `github-handle` |
-| ETL Lead |  | `github-handle` |
-| Analysis Lead |  | `github-handle` |
-| Visualization Lead |  | `github-handle` |
-| Strategy Lead |  | `github-handle` |
-| PPT and Quality Lead |  | `github-handle` |
+| Data Lead | Alisha Gupta | `@alisha-1000` |
+| ETL Lead | Himanshu Pal | `@HimanshuPal29` |
+| Analysis Lead | Karan Chhillar | `@kchhillar13` |
+| Visualization Lead | Alisha Gupta | `@alisha-1000` |
+| Strategy Lead | Dhruv Kumar | `@drv-01` |
+| PPT and Quality Lead | Hemanth Tenneti | `@HemanthTenneti` |
+| Business Support | Vansh Khod | `@VanshKhod9` |
 
 ---
 
@@ -121,7 +122,7 @@ Document KPI logic clearly in `notebooks/04_statistical_analysis.ipynb` and `not
 
 | Item | Details |
 |---|---|
-| **Dashboard URL** | _To be added after Tableau Public publishing_ |
+| **Dashboard URL** | https://public.tableau.com/app/profile/hemanth.tenneti/viz/SectionB_Group10_OlistCommerce/Overview?publish=yes |
 | **Executive View** | KPI scorecard (Revenue, AOV, CSAT, On-Time %), monthly trend lines, top/bottom performing states |
 | **Operational View** | Drill-down by state → category → seller; delivery delay heatmap; review score vs delivery time scatter; payment type breakdown |
 | **Main Filters** | Date range, Customer State, Product Category, Payment Type, Review Score Band |
@@ -253,37 +254,37 @@ The project follows a structured 7-step workflow:
 
 **GitHub Repository**
 
-- [ ] Public repository created with the correct naming convention (`SectionName_TeamID_ProjectName`)
-- [ ] All notebooks committed in `.ipynb` format
-- [ ] `data/raw/` contains the original, unedited dataset
-- [ ] `data/processed/` contains the cleaned pipeline output
-- [ ] `tableau/screenshots/` contains dashboard screenshots
-- [ ] `tableau/dashboard_links.md` contains the Tableau Public URL
-- [ ] `docs/data_dictionary.md` is complete
-- [ ] `README.md` explains the project, dataset, and team
+- [x] Public repository created with the correct naming convention (`SectionName_TeamID_ProjectName`)
+- [x] All notebooks committed in `.ipynb` format
+- [x] `data/raw/` contains the original, unedited dataset
+- [x] `data/processed/` contains the cleaned pipeline output
+- [x] `tableau/screenshots/` contains dashboard screenshots
+- [x] `tableau/dashboard_links.md` contains the Tableau Public URL
+- [x] `docs/data_dictionary.md` is complete
+- [x] `README.md` explains the project, dataset, and team
 - [ ] All members have visible commits and pull requests
 
 **Tableau Dashboard**
 
-- [ ] Published on Tableau Public and accessible via public URL
-- [ ] At least one interactive filter included
-- [ ] Dashboard directly addresses the business problem
+- [x] Published on Tableau Public and accessible via public URL
+- [x] At least one interactive filter included
+- [x] Dashboard directly addresses the business problem
 
 **Project Report**
 
 - [ ] Final report exported as PDF into `reports/`
-- [ ] Cover page, executive summary, sector context, problem statement
-- [ ] Data description, cleaning methodology, KPI framework
-- [ ] EDA with written insights, statistical analysis results
-- [ ] Dashboard screenshots and explanation
-- [ ] 8-12 key insights in decision language
-- [ ] 3-5 actionable recommendations with impact estimates
-- [ ] Contribution matrix matches GitHub history
+- [x] Cover page, executive summary, sector context, problem statement
+- [x] Data description, cleaning methodology, KPI framework
+- [x] EDA with written insights, statistical analysis results
+- [x] Dashboard screenshots and explanation
+- [x] 8-12 key insights in decision language
+- [x] 3-5 actionable recommendations with impact estimates
+- [x] Contribution matrix matches GitHub history
 
 **Presentation Deck**
 
 - [ ] Final presentation exported as PDF into `reports/`
-- [ ] Title slide through recommendations, impact, limitations, and next steps
+- [x] Title slide through recommendations, impact, limitations, and next steps
 
 **Individual Assets**
 
@@ -298,12 +299,12 @@ This table must match evidence in GitHub Insights, PR history, and committed fil
 
 | Team Member | Dataset and Sourcing | ETL and Cleaning | EDA and Analysis | Statistical Analysis | Tableau Dashboard | Report Writing | PPT and Viva |
 |---|---|---|---|---|---|---|---|
-| _Member 1_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ |
-| _Member 2_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ |
-| _Member 3_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ |
-| _Member 4_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ |
-| _Member 5_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ |
-| _Member 6_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ |
+| Hemanth Tenneti (`@HemanthTenneti`) | Owner | Owner | Owner | Owner | Owner (Co-owner with Alisha) | Owner | Owner |
+| Alisha Gupta (`@alisha-1000`) | Owner | Support | Owner | Support | Owner (Co-owner with Hemanth) | Support | Support |
+| Himanshu Pal (`@HimanshuPal29`) | Support | Owner | Support | Support | Support | Support | Support |
+| Karan Chhillar (`@kchhillar13`) | Support | Support | Support | Owner | Support | Support | Support |
+| Dhruv Kumar (`@drv-01`) | No visible contribution | No visible contribution | No visible contribution | No visible contribution | No visible contribution | No visible contribution | No visible contribution |
+| Vansh Khod (`@VanshKhod9`) | No visible contribution | No visible contribution | No visible contribution | No visible contribution | No visible contribution | No visible contribution | No visible contribution |
 
 _Declaration: We confirm that the above contribution details are accurate and verifiable through GitHub Insights, PR history, and submitted artifacts._
 
